@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import logoImg from "../assets/images/alpha_logo_1782920250262.jpg";
+import logoImg from "../assets/images/alpha_logo_whatsapp_final.jpg";
 
 interface AlphaLogoProps {
   isPlaying?: boolean;
