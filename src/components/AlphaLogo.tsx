@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import logoImg from "../assets/images/alpha_logo_whatsapp_final.jpg";
+import localLogoImg from "../assets/images/alpha_logo_whatsapp_final.jpg";
+
+// Use the direct absolute CDN URL provided by the user for perfect iframe compatibility
+const logoImg = "https://i.ibb.co/xq1MRnQ6/Whats-App-Image-2026-06-28-at-7-15-37-PM.jpg";
 
 interface AlphaLogoProps {
   isPlaying?: boolean;
@@ -10,6 +13,7 @@ interface AlphaLogoProps {
 export default function AlphaLogo({ isPlaying = false, scale = 1.0 }: AlphaLogoProps) {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [imgSrc, setImgSrc] = useState<string>(logoImg);
 
   // Motion values for magnetic 3D tilt
   const x = useMotionValue(0);
@@ -108,12 +112,19 @@ export default function AlphaLogo({ isPlaying = false, scale = 1.0 }: AlphaLogoP
         className="relative flex flex-col items-center justify-center animate-float"
         id="alpha-logo-mesh"
       >
-        <div className="relative w-full max-w-[420px] flex items-center justify-center">
+        {/* Set explicit width to avoid flex collapsing in some layouts */}
+        <div className="relative w-[280px] sm:w-[320px] md:w-[380px] aspect-square flex items-center justify-center rounded-2xl overflow-hidden border border-white/5 bg-black/10 shadow-2xl">
           <img
-            src={logoImg}
+            src={imgSrc}
             alt="The Alpha Effect"
-            className="w-full h-auto select-none pointer-events-none"
+            className="w-full h-full object-contain select-none pointer-events-none rounded-2xl transition-all duration-300"
             referrerPolicy="no-referrer"
+            onError={() => {
+              // Fallback to local imported image if the CDN URL fails
+              if (imgSrc !== localLogoImg) {
+                setImgSrc(localLogoImg);
+              }
+            }}
           />
         </div>
       </motion.div>
