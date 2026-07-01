@@ -1,0 +1,6 @@
+{
+  "name": "THE ALPHA EFFECT",
+  "description": "A premium, futuristic music streaming experience with glassmorphism UI, interactive audio, and cinematic animations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
